@@ -1,7 +1,7 @@
 import apiHandler from 'services/apiHandler';
 
 export default {
-  createRecipient: (bank_code: string, account_number: number, name: string) =>
+  createRecipient: (bank_code: string, account_number: string, name: string) =>
     apiHandler.post(`/transferrecipient`, {
       type: 'nuban',
       name,
@@ -10,7 +10,7 @@ export default {
       currency: 'NGN',
     }),
 
-  initiateTransfer: (amount: number, recipient: number) =>
+  initiateTransfer: (amount: number, recipient: string) =>
     apiHandler.post(`/transfer`, {
       source: 'balance',
       amount,

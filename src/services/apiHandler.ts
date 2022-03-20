@@ -1,5 +1,5 @@
 import Axios, {AxiosRequestConfig, Method} from 'axios';
-export const BASE_URL = 'api.paystack.co';
+export const BASE_URL = 'https://api.paystack.co';
 /**
  * Utility that calls the backend api service
  * @param {String} url: /path/to/api
@@ -33,7 +33,7 @@ export const apiService = (
     return 'application/json';
   };
 
-  const SECRET_KEY = 'JJHJJH';
+  const SECRET_KEY = 'sk_test_19ca61f2b9533404a151c666aaba6ec95b05ad54';
 
   const header = {
     'Content-Type': headerContent(),
@@ -52,12 +52,11 @@ export const apiService = (
     Axios(config)
       .then(res => {
         resolve(res.data.data || res);
+        console.log({res});
       })
       .catch(error => {
         if (error && !error.response) {
-          throw new Error(
-            'Could not connect to the server, please check your internet connection',
-          );
+          throw new Error('Could not connect to the server');
         }
         reject(error.response.data);
       });
@@ -69,5 +68,5 @@ export const apiService = (
 export default {
   post: async (url: string, data: any, options?: any) =>
     apiService(url, 'POST', data, options),
-  get: async (url: string, data?: any, options?: any) => apiService(url, 'GET'),
+  get: async (url: string) => apiService(url, 'GET'),
 };
