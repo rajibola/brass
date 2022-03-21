@@ -2,6 +2,11 @@ import {StyleSheet} from 'react-native';
 import {hp, wp} from 'utils/responsive-dimensions';
 
 export const styles = StyleSheet.create({
+  initials: {
+    letterSpacing: 1,
+    fontWeight: 'bold',
+    color: 'gray',
+  },
   container: {
     width: '100%',
     height: hp(70),
@@ -10,6 +15,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: wp(15),
+    borderBottomWidth: 1,
+    marginBottom: hp(5),
+    borderBottomColor: '#e6e6e6',
   },
 
   row: {

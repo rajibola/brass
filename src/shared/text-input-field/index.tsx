@@ -1,6 +1,7 @@
 import React from 'react';
 import {FC} from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {styles} from './styles';
 
 export const TextInputField: FC<{
   onChangeText?: (e: string) => void;
@@ -11,11 +12,11 @@ export const TextInputField: FC<{
   [x: string]: any;
 }> = ({onPress, value, clickable, onChangeText, placeholder, ...props}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={{}}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       {!clickable ? (
         <TextInput
           placeholder={placeholder}
-          style={{height: 40, borderWidth: 1, paddingHorizontal: 10}}
+          style={{height: 40, paddingHorizontal: 10}}
           {...props}
           value={value}
           onChangeText={onChangeText}
@@ -24,7 +25,6 @@ export const TextInputField: FC<{
         <View
           style={{
             height: 40,
-            borderWidth: 1,
             paddingHorizontal: 10,
             justifyContent: 'center',
           }}>

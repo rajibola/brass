@@ -3,7 +3,7 @@ import {hp} from 'utils';
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: hp(70),
+    borderBottomWidth: 1,
+    marginBottom: hp(5),
   },
 });

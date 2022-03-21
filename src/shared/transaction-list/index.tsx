@@ -10,12 +10,13 @@ export const TransactionList: FC<{
   status: string;
   amount: number;
   date: string;
-}> = ({name, status, amount, date}) => {
+  onPress?: (e: any) => void;
+}> = ({name, status, amount, date, onPress}) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.row}>
         <View style={styles.avatar}>
-          <Text>{getInitials(name)}</Text>
+          <Text style={styles.initials}>{getInitials(name)}</Text>
         </View>
         <View>
           <Text style={styles.name} ellipsizeMode="tail" numberOfLines={1}>

@@ -1,7 +1,8 @@
 import {useSearch} from 'hooks';
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {FlatList, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import {ITransferHistory} from 'redux';
 import {RootDispatch, RootState} from 'redux/store';
 import {ModalView, SearchBar, TransactionList} from 'shared';
 import {deviceHeight} from 'utils';
@@ -12,6 +13,7 @@ export const PaymentHistory = () => {
   const {data, isLoading} = useSelector((state: RootState) => state.Transfers);
 
   const [search, setSearch] = useState<string>('');
+  const [transaction, setTransaction] = useState<ITransferHistory>();
 
   const filteredList = useSearch(
     data.map(item => {
@@ -34,6 +36,7 @@ export const PaymentHistory = () => {
         status={status}
         amount={amount}
         date={createdAt}
+        onPress={() => setTransaction(item)}
       />
     );
   };
@@ -52,24 +55,47 @@ export const PaymentHistory = () => {
         onRefresh={getAllTranfers}
         refreshing={isLoading}
       />
-      <ModalView visible={isLoading} full>
-        <View
-          style={{
-            flex: 1,
-            position: 'absolute',
-            // justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: deviceHeight,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            zIndex: 5,
-            paddingTop: '50%',
-          }}>
-          <Text style={{color: 'white', fontSize: 18}}>
-            Loading Transaction History...
-          </Text>
-        </View>
-      </ModalView>
+      <Preview data={transaction!} onExit={() => setTransaction(undefined)} />
+      <Loader isLoading={isLoading} />
     </View>
+  );
+};
+
+export const Preview: FC<{
+  data: ITransferHistory;
+  onExit: () => void;
+}> = ({data, onExit}) => {
+  return (
+    <ModalView visible={!!data} onClickExit={onExit}>
+      <View
+        style={{
+          flex: 1,
+        }}>
+        <Text style={{fontSize: 18}}>{data?.amount}</Text>
+      </View>
+    </ModalView>
+  );
+};
+
+export const Loader: FC<{isLoading: boolean | string}> = ({isLoading}) => {
+  return (
+    <ModalView visible={!!isLoading} full>
+      <View
+        style={{
+          flex: 1,
+          position: 'absolute',
+          // justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          height: deviceHeight,
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          zIndex: 5,
+          paddingTop: '50%',
+        }}>
+        <Text style={{color: 'white', fontSize: 18}}>
+          Loading Transaction History...
+        </Text>
+      </View>
+    </ModalView>
   );
 };

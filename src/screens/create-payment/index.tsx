@@ -75,48 +75,85 @@ export const CreatePayment = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Create Payment</Text>
-      <TextInputField
-        placeholder="Select bank"
-        clickable
-        onPress={() => setModal(true)}
-        value={selectedBank?.name}
-      />
+      <Background />
+      <View>
+        <Text style={styles.brass}>Brass</Text>
+        <Text style={styles.subText}>Transfer funds made easy!</Text>
+      </View>
 
-      <TextInputField
-        onChangeText={setAccountNumber}
-        placeholder="Account number"
-        value={accountNumber}
-        editable={!!selectedBank}
-        maxLength={10}
-      />
-
-      <TextInputField
-        placeholder="Account name"
-        value={accountName}
-        editable={false}
-      />
-
-      <TextInputField
-        onChangeText={setAmount}
-        placeholder="Enter amount"
-        value={amount}
-        editable={!!selectedBank}
-      />
-
-      <Button
-        data={[amount, accountName, accountNumber, selectedBank?.code]}
-        onPress={transfer}
-      />
-
-      <ModalView visible={modal} onClickExit={() => setModal(false)}>
-        <SearchBar onChangeText={setSearch} value={search} />
-        <FlatList
-          data={filteredBanks}
-          keyExtractor={item => item.id.toString()}
-          renderItem={_renderItem}
+      <View>
+        <TextInputField
+          placeholder="Select bank"
+          clickable
+          onPress={() => setModal(true)}
+          value={selectedBank?.name}
         />
-      </ModalView>
+
+        <TextInputField
+          onChangeText={setAccountNumber}
+          placeholder="Account number"
+          value={accountNumber}
+          editable={!!selectedBank}
+          maxLength={10}
+        />
+
+        <TextInputField
+          placeholder="Account name"
+          value={accountName}
+          editable={false}
+        />
+
+        <TextInputField
+          onChangeText={setAmount}
+          placeholder="Enter amount"
+          value={amount}
+          editable={!!selectedBank}
+        />
+
+        <Button
+          data={[amount, accountName, accountNumber, selectedBank?.code]}
+          onPress={transfer}
+        />
+
+        <ModalView visible={modal} onClickExit={() => setModal(false)}>
+          <SearchBar onChangeText={setSearch} value={search} />
+          <FlatList
+            data={filteredBanks}
+            keyExtractor={item => item.id.toString()}
+            renderItem={_renderItem}
+          />
+        </ModalView>
+      </View>
+    </View>
+  );
+};
+
+const Background = () => {
+  return (
+    <View
+      style={{
+        flex: 1,
+        // backgroundColor: 'red',
+        position: 'absolute',
+        // alignSelf: 'center',
+        // left: 0,
+        right: '-80%',
+        top: '20%',
+        // bottom: 0,
+        // borderWidth: 1,
+        width: '170%',
+        height: '100%',
+        justifyContent: 'center',
+      }}>
+      <Text
+        style={{
+          fontSize: 190,
+          fontWeight: '900',
+          transform: [{rotate: '90deg'}],
+          opacity: 0.09,
+        }}>
+        BRASS
+      </Text>
     </View>
   );
 };
