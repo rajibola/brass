@@ -18,7 +18,6 @@ export const Banks = {
       try {
         const result = await bankAPI.getBanks();
         const data = (await result) as UserResponse;
-        console.log(data);
         if (data) {
           dispatch.Banks.setState({banks: data});
           return data || [];
@@ -29,8 +28,13 @@ export const Banks = {
       }
     },
 
-    async verifyAccount(data: any) {
-      const {bank_code, account_number} = data;
+    async verifyAccount({
+      bank_code,
+      account_number,
+    }: {
+      bank_code: string;
+      account_number: string;
+    }) {
       try {
         const recipient = await bankAPI.verifyAccount(
           bank_code,
