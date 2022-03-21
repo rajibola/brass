@@ -1,6 +1,7 @@
 import moment from 'moment';
 import React, {FC} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
+import {getInitials} from 'utils';
 import {formatMoney} from 'utils/format-money';
 import {styles} from './styles';
 
@@ -14,7 +15,7 @@ export const TransactionList: FC<{
     <TouchableOpacity style={styles.container}>
       <View style={styles.row}>
         <View style={styles.avatar}>
-          <Text>ARA</Text>
+          <Text>{getInitials(name)}</Text>
         </View>
         <View>
           <Text style={styles.name} ellipsizeMode="tail" numberOfLines={1}>

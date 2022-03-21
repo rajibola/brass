@@ -17,17 +17,17 @@ export const Transfers = {
   effects: (dispatch: {[key: string]: any}) => ({
     async getAllTranfers() {
       try {
-        dispatch.Transfers.setLoading(true);
+        dispatch.Transfers.setState({isLoading: true});
         const result = await transferAPI.getTransfers();
         const data = (await result) as UserResponse;
         if (data) {
-          dispatch.Transfers.setLoading(false);
+          dispatch.Transfers.setState({isLoading: false});
           dispatch.Transfers.setState({data: data});
           return data || [];
         }
       } catch (error) {
         console.log(error);
-        dispatch.Transfers.setLoading(false);
+        dispatch.Transfers.setState({isLoading: false});
         dispatch.Transfers.setError(true);
       }
     },
@@ -39,7 +39,7 @@ export const Transfers = {
       recipient_name,
     }: TransferProps) {
       try {
-        dispatch.Transfers.setLoading(true);
+        dispatch.Transfers.setState({isLoading: true});
         const recipient = await transferAPI.createRecipient(
           bank_code,
           account_number,
@@ -50,11 +50,11 @@ export const Transfers = {
           +amount,
           receipientData.recipient_code,
         );
-        dispatch.Transfers.setLoading(false);
+        dispatch.Transfers.setState({isLoading: false});
         return result;
       } catch (error) {
         console.log(error);
-        dispatch.Transfers.setLoading(false);
+        dispatch.Transfers.setState({isLoading: false});
 
         dispatch.Transfers.setError(true);
       }
