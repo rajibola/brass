@@ -4,10 +4,12 @@ import {reducerActions as reducers} from './reducers';
 
 interface UserResponse {
   banks: ReadonlyArray<IBanks>;
+  isLoading: boolean;
 }
 
 const State: UserResponse = {
   banks: [],
+  isLoading: false,
 };
 export const Banks = {
   name: 'Banks',

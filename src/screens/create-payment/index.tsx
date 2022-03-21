@@ -1,19 +1,21 @@
-import {useSearch} from 'hooks/useSearch';
+import {useSearch} from 'hooks';
 import React, {useEffect, useState} from 'react';
-import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, FlatList, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {IBanks} from 'redux/models';
-import {RootDispatch, RootState} from 'redux/store';
-import {ModalView, SearchBar} from 'shared';
-import {TextInputField} from 'shared/text-input-field';
-import {hp} from 'utils/responsive-dimensions';
+import {RootDispatch, RootState, IBanks} from 'redux';
+import {ModalView, SearchBar, TextInputField, Button} from 'shared';
+import {hp} from 'utils';
 import {styles} from './styles';
 
 export const CreatePayment = () => {
-  const {getBanks, verifyAccount} = useDispatch<RootDispatch>().Banks;
+  const {
+    Banks: {getBanks, verifyAccount},
+    Transfers: {initiateTransfer},
+  } = useDispatch<RootDispatch>();
   const {banks} = useSelector((state: RootState) => state.Banks);
 
   const [accountNumber, setAccountNumber] = useState<string>('');
+  const [accountName, setAccountName] = useState<string>('');
   const [amount, setAmount] = useState<string>();
   const [selectedBank, setSelectedBank] = useState<IBanks>();
   const [search, setSearch] = useState<string>('');
@@ -33,15 +35,29 @@ export const CreatePayment = () => {
         bank_code: selectedBank?.code!,
         account_number: accountNumber,
       });
-      if (!!response) {
-        console.log({response});
+      if (!!response?.account_name) {
+        setAccountName(response.account_name);
+      } else {
+        setAccountName('');
+        Alert.alert('Account not found');
       }
     };
 
     verify();
   }, [accountNumber, selectedBank]);
 
-  const transfer = () => {};
+  const transfer = () => {
+    if (+amount! < 100 || +amount! > 10000000) {
+      Alert.alert('Amount must be between 100 and 10,000,000 naira');
+      return;
+    }
+    initiateTransfer({
+      amount: amount!,
+      account_number: accountNumber,
+      recipient_name: accountName,
+      bank_code: selectedBank?.code!,
+    });
+  };
 
   const _renderItem = ({item}: {item: IBanks}) => {
     return (
@@ -49,6 +65,7 @@ export const CreatePayment = () => {
         style={styles.listItem}
         onPress={() => {
           setSelectedBank(item);
+          setSearch('');
           setModal(false);
         }}>
         <Text style={{fontSize: hp(15)}}>{item.name}</Text>
@@ -75,15 +92,25 @@ export const CreatePayment = () => {
       />
 
       <TextInputField
+        placeholder="Account name"
+        value={accountName}
+        editable={false}
+      />
+
+      <TextInputField
         onChangeText={setAmount}
         placeholder="Enter amount"
         value={amount}
         editable={!!selectedBank}
-        // maxLength={10}
+      />
+
+      <Button
+        data={[amount, accountName, accountNumber, selectedBank?.code]}
+        onPress={transfer}
       />
 
       <ModalView visible={modal} onClickExit={() => setModal(false)}>
-        <SearchBar onChangeText={setSearch} />
+        <SearchBar onChangeText={setSearch} value={search} />
         <FlatList
           data={filteredBanks}
           keyExtractor={item => item.id.toString()}

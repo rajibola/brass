@@ -15,8 +15,11 @@ export const styles = StyleSheet.create({
     width: '100%',
     maxHeight: '90%',
     minHeight: '50%',
+    height: '80%',
     backgroundColor: 'white',
     borderTopRightRadius: hp(30),
+    borderTopLeftRadius: hp(30),
+    paddingTop: hp(25),
   },
   container: {
     flex: 1,

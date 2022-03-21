@@ -3,10 +3,12 @@ import {reducerActions as reducers} from './reducers';
 
 interface UserResponse {
   data: ReadonlyArray<ITransferHistory>;
+  isLoading: boolean;
 }
 
 const State: UserResponse = {
   data: [],
+  isLoading: false,
 };
 export const Transfers = {
   name: 'Transfers',
@@ -15,22 +17,29 @@ export const Transfers = {
   effects: (dispatch: {[key: string]: any}) => ({
     async getAllTranfers() {
       try {
+        dispatch.Transfers.setLoading(true);
         const result = await transferAPI.getTransfers();
         const data = (await result) as UserResponse;
-        console.log(data, result);
         if (data) {
+          dispatch.Transfers.setLoading(false);
           dispatch.Transfers.setState({data: data});
           return data || [];
         }
       } catch (error) {
         console.log(error);
+        dispatch.Transfers.setLoading(false);
         dispatch.Transfers.setError(true);
       }
     },
 
-    async initiateTransfer(data: any) {
-      const {amount, bank_code, account_number, recipient_name} = data;
+    async initiateTransfer({
+      amount,
+      bank_code,
+      account_number,
+      recipient_name,
+    }: TransferProps) {
       try {
+        dispatch.Transfers.setLoading(true);
         const recipient = await transferAPI.createRecipient(
           bank_code,
           account_number,
@@ -38,17 +47,27 @@ export const Transfers = {
         );
         const receipientData = (await recipient) as ICreateTransfer;
         const result = await transferAPI.initiateTransfer(
-          amount,
+          +amount,
           receipientData.recipient_code,
         );
+        dispatch.Transfers.setLoading(false);
         return result;
       } catch (error) {
         console.log(error);
+        dispatch.Transfers.setLoading(false);
+
         dispatch.Transfers.setError(true);
       }
     },
   }),
 };
+
+export interface TransferProps {
+  amount: string;
+  bank_code: string;
+  account_number: string;
+  recipient_name: string;
+}
 
 export interface ICreateTransfer {
   active: true;

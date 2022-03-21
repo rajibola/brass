@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {hp} from 'utils/responsive-dimensions';
 
 export const styles = StyleSheet.create({
   clear: {
@@ -14,5 +15,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 10,
+    marginBottom: hp(15),
   },
 });

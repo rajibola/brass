@@ -23,11 +23,11 @@ export const useSearch = (
         );
       });
     });
-  }, [data, keys, keywords]);
+  }, [data, keywords]);
 
   useEffect(() => {
     setFilteredData(searchResult);
-  }, [keywords, data]);
+  }, [keywords]);
 
   return filteredData;
 };
