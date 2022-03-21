@@ -5,7 +5,7 @@ interface UserResponse {
   data: ReadonlyArray<ITransferHistory>;
 }
 
-const State = {
+const State: UserResponse = {
   data: [],
 };
 export const Transfers = {
