@@ -5,18 +5,25 @@ import {RootDispatch, RootState} from 'redux/store';
 import {styles} from './styles';
 
 export const CreatePayment = () => {
-  const {getAllTranfers} = useDispatch<RootDispatch>().Transfers;
-  const Transfers = useSelector((state: RootState) => state.Transfers).data;
+  const {getBanks} = useDispatch<RootDispatch>().Banks;
+  const {banks} = useSelector((state: RootState) => state.Banks);
 
   useEffect(() => {
-    getAllTranfers();
+    getBanks();
   }, []);
 
   return (
     <View style={styles.container}>
       <Text>Create Payment</Text>
 
-      <Text>{JSON.stringify(Transfers)}</Text>
+      {!!banks &&
+        banks.map(item => {
+          return (
+            <View key={item.id}>
+              <Text>{item.name}</Text>
+            </View>
+          );
+        })}
     </View>
   );
 };

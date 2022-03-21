@@ -57,8 +57,8 @@ export interface ICreateTransfer {
   description: null;
   domain: string;
   email: null;
-  id: 27514241;
-  integration: 756281;
+  id: number;
+  integration: number;
   metadata: null;
   name: string;
   recipient_code: string;

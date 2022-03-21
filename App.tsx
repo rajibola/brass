@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-// import 'react-native-gesture-handler';
+import 'react-native-gesture-handler';
 import React from 'react';
 import {MainNavigator} from 'navigation';
 import {Provider} from 'react-redux';
