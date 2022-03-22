@@ -41,6 +41,51 @@ $ cd .. && yarn run ios
    c. Sends the payment information to the API for processing
 2. An interface that allows a user see all payments they've ever created and view the details on any one that's selected
 
+### Folder Structure
+
+```
+.
+├── App.tsx
+├── Gemfile
+├── Gemfile.lock
+├── README.md
+├── __tests__
+│   ├── background.component.test.tsx
+│   ├── button.component.test.tsx
+│   ├── create-payment.test.tsx
+│   ├── format-money.utils.test.ts
+│   ├── helpers.utils.test.tsx
+│   ├── loader.component.test.tsx
+│   ├── modal-view.component.test.tsx
+│   ├── payment-history.test.tsx
+│   ├── preview.component.test.tsx
+│   └── transaction-list.component.test.tsx
+├── app.json
+├── babel.config.js
+├── docs
+│   └── images
+├── index.js
+├── metro.config.js
+├── package.json
+├── src
+│   ├── constants
+│   ├── env.dev.ts
+│   ├── env.prod.ts
+│   ├── hooks
+│   ├── navigation
+│   ├── redux
+│   ├── screens
+│   ├── services
+│   ├── shared
+│   ├── types
+│   └── utils
+├── tsconfig.json
+└── yarn.lock
+
+13 directories, 23 files
+
+```
+
 ## Solution
 
 1. Used Paystack APIs to `verify account`, `get banks`,`get all transfers`, `initiate transfer` and `create recipient`.
