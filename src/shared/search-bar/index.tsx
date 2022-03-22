@@ -14,6 +14,7 @@ export const SearchBar: FC<Props> = ({onChangeText, value, ...props}) => {
         onChangeText={onChangeText}
         value={value}
         {...props}
+        testID="input"
       />
 
       {!!value && (
