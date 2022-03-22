@@ -4,7 +4,13 @@ import {Text, TouchableOpacity} from 'react-native';
 import {ButtonComponentProps as Props} from 'types/types';
 import {styles} from './styles';
 
-export const Button: FC<Props> = ({data, onPress, buttonStyle, textStyle}) => {
+export const Button: FC<Props> = ({
+  data,
+  onPress,
+  buttonStyle,
+  textStyle,
+  text,
+}) => {
   const filled = data.every(item => !!item);
   return (
     <TouchableOpacity
@@ -15,7 +21,7 @@ export const Button: FC<Props> = ({data, onPress, buttonStyle, textStyle}) => {
       ]}
       onPress={onPress}
       disabled={!filled}>
-      <Text style={[styles.text, textStyle]}>TRANSFER NOW</Text>
+      <Text style={[styles.text, textStyle]}>{text}</Text>
     </TouchableOpacity>
   );
 };

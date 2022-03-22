@@ -133,6 +133,7 @@ export const CreatePayment = () => {
           <Button
             data={[amount, accountName, accountNumber, selectedBank?.code]}
             onPress={transfer}
+            text="TRANSFER NOW"
           />
 
           <ModalView visible={modal} onClickExit={() => setModal(false)}>

@@ -1,4 +1,4 @@
-import {render, waitFor} from '@testing-library/react-native';
+import {act, render, waitFor} from '@testing-library/react-native';
 import React from 'react';
 import {Provider} from 'react-redux';
 import store from 'redux/store';
@@ -26,7 +26,7 @@ it('check if search bar function works correctly', () => {
   );
   const input = getByPlaceholderText(/Search by name, amount and status/i).props
     .onChangeText;
-  input('test');
+  act(() => input('test'));
   expect(input).toBeTruthy();
 
   const input2 = getByPlaceholderText(/Search by name, amount and status/i);

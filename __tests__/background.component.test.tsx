@@ -4,7 +4,7 @@ import {Background} from 'shared';
 
 jest.useFakeTimers();
 
-it('renders search bar correctly', async () => {
+it('renders background correctly', async () => {
   const {getByText} = render(<Background text="Brass" variant="big" />);
   const view = await waitFor(() => getByText(/Brass/i));
   expect(view).toBeTruthy();

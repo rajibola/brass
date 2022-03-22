@@ -152,6 +152,7 @@ export interface ButtonComponentProps {
   onPress: () => void;
   buttonStyle?: ViewStyle;
   textStyle?: TextStyle;
+  text: string;
 }
 
 export interface SearchBarProps {
