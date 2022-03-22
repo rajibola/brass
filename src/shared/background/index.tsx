@@ -1,14 +1,12 @@
 import React, {FC} from 'react';
 import {Text, View} from 'react-native';
+import {BackgroundProps as Props} from 'types/types';
 import {styles, textVariant} from './styles';
 
-export const Background: FC<{
-  text: string;
-  variant: keyof typeof textVariant;
-}> = ({text, variant}) => {
+export const Background: FC<Props> = ({text, variant}) => {
   return (
     <View style={styles.container}>
-      <Text style={[styles.text, textVariant[variant]]}>{text}</Text>
+      <Text style={textVariant[variant]}>{text}</Text>
     </View>
   );
 };

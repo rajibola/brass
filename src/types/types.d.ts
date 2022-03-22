@@ -1,6 +1,7 @@
 import {RematchDispatch, RematchRootState} from '@rematch/core';
 import {TextStyle, ViewStyle} from 'react-native';
 import * as models from 'redux/models';
+import {textVariant} from 'shared/background/styles';
 
 export type RootState = RematchRootState<typeof models>;
 export type RootDispatch = RematchDispatch<typeof models>;
@@ -11,6 +12,11 @@ export type RootStackParamList = {
   Home: {item: IParams};
   History: {item: IParams};
 };
+
+export interface BackgroundProps {
+  text: string;
+  variant: keyof typeof textVariant;
+}
 
 export interface BankResponse {
   banks: ReadonlyArray<IBanks>;
