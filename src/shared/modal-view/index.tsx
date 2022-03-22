@@ -18,7 +18,10 @@ export const ModalView: FC<Props> = ({
           children
         ) : (
           <View style={styles.innerView}>
-            <TouchableOpacity style={styles.closeButton} onPress={onClickExit}>
+            <TouchableOpacity
+              style={styles.closeButton}
+              testID="touchable-opacity"
+              onPress={onClickExit}>
               <Icon name="close" size={30} color="#000" />
             </TouchableOpacity>
             {children}
