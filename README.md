@@ -88,7 +88,7 @@ $ cd .. && yarn run ios
 
 ## Solution
 
-1. Used Paystack APIs to `verify account`, `get banks`,`get all transfers`, `initiate transfer` and `create recipient`.
+1. Used [Paystack APIs](https://paystack.com/docs/transfers/single-transfers/) to `verify account`, `get banks`,`get all transfers`, `initiate transfer` and `create recipient`.
 2. Created two interface as per the instruction given above, one for the fund transfer and the other for displaying transaction history.
 3. Made use of modal for view transaction and select bank views.
 4. Made the design from inspirations found on the brass mobile app on AppStore.
