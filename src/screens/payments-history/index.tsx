@@ -2,11 +2,10 @@ import {useSearch} from 'hooks';
 import React, {useEffect, useState} from 'react';
 import {FlatList, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {RootDispatch, RootState} from 'redux/store';
 import {SearchBar, TransactionList} from 'shared';
 import {Loader} from 'shared/loader';
 import {Preview} from 'shared/preview';
-import {ITransferHistory} from 'types/types';
+import {ITransferHistory, RootDispatch, RootState} from 'types/types';
 import {styles} from './styles';
 
 export const PaymentHistory = () => {

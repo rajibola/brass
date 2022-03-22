@@ -5,6 +5,7 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {CreatePayment, PaymentHistory} from 'screens';
 import {RootStackParamList} from 'types/types';
+import {hp} from 'utils';
 Icon.loadFont();
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
@@ -18,7 +19,7 @@ export const MainNavigator = () => {
           tabBarActiveTintColor: colors.green,
           tabBarInactiveTintColor: 'gray',
           tabBarLabelStyle: {
-            fontSize: 13,
+            fontSize: hp(13),
           },
           tabBarIcon: ({focused, color, size}) => {
             let iconName: string;

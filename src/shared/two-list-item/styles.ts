@@ -2,8 +2,8 @@ import {StyleSheet} from 'react-native';
 import {hp} from 'utils';
 
 export const styles = StyleSheet.create({
-  properties: {fontSize: 16, fontWeight: '300'},
-  value: {fontSize: 16},
+  properties: {fontSize: hp(16), fontWeight: '300'},
+  value: {fontSize: hp(16)},
   container: {
     // flex: 1,
     flexDirection: 'row',

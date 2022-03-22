@@ -1,3 +1,4 @@
+import colors from 'constants/colors';
 import {StyleSheet} from 'react-native';
 import {hp, wp} from 'utils/responsive-dimensions';
 
@@ -43,7 +44,7 @@ export const styles = StyleSheet.create({
   name: {fontWeight: '600', fontSize: hp(14), marginBottom: hp(4), width: 200},
 
   amount: {
-    color: 'green',
+    color: colors.green,
     fontWeight: '600',
     marginBottom: hp(2),
     fontSize: hp(16),

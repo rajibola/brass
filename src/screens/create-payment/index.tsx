@@ -10,11 +10,10 @@ import {
   View,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {RootDispatch, RootState} from 'redux/store';
 import {Button, ModalView, SearchBar, TextInputField} from 'shared';
 import {Background} from 'shared/background';
 import {Loader} from 'shared/loader';
-import {IBanks} from 'types/types';
+import {IBanks, RootDispatch, RootState} from 'types/types';
 import {hp} from 'utils';
 import {styles} from './styles';
 
@@ -86,7 +85,7 @@ export const CreatePayment = () => {
           setSearch('');
           setModal(false);
         }}>
-        <Text style={{fontSize: hp(15)}}>{item.name}</Text>
+        <Text style={styles.name}>{item.name}</Text>
       </TouchableOpacity>
     );
   };

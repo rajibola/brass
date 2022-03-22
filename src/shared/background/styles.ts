@@ -1,12 +1,6 @@
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  text: {
-    fontSize: 190,
-    fontWeight: '900',
-    transform: [{rotate: '90deg'}],
-    opacity: 0.09,
-  },
   container: {
     flex: 1,
     position: 'absolute',

@@ -1,7 +1,9 @@
+import COLORS from 'constants/colors';
 import {StyleSheet} from 'react-native';
 import {hp, wp} from 'utils/responsive-dimensions';
 
 export const styles = StyleSheet.create({
+  name: {fontSize: hp(15)},
   subText: {
     fontSize: hp(34),
     fontWeight: '300',
@@ -13,7 +15,7 @@ export const styles = StyleSheet.create({
     color: 'rgb(94,202,105)',
     marginTop: hp(40),
     marginBottom: hp(10),
-    letterSpacing: 2,
+    letterSpacing: hp(2),
   },
   listItem: {
     height: hp(40),
@@ -26,7 +28,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: hp(50),
     paddingHorizontal: wp(20),
-    backgroundColor: 'white',
+    backgroundColor: COLORS.white,
     justifyContent: 'space-between',
     paddingBottom: hp(90),
   },

@@ -6,11 +6,10 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'absolute',
-    // justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
     height: deviceHeight,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
     zIndex: 5,
     paddingTop: '70%',
   },

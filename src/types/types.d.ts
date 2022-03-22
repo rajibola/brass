@@ -1,4 +1,9 @@
+import {RematchDispatch, RematchRootState} from '@rematch/core';
 import {TextStyle, ViewStyle} from 'react-native';
+import * as models from 'redux/models';
+
+export type RootState = RematchRootState<typeof models>;
+export type RootDispatch = RematchDispatch<typeof models>;
 
 export interface IParams {}
 
@@ -7,10 +12,22 @@ export type RootStackParamList = {
   History: {item: IParams};
 };
 
-interface BankResponse {
+export interface BankResponse {
   banks: ReadonlyArray<IBanks>;
   isLoading?: boolean | string;
   isVerifying?: boolean | string;
+}
+
+export interface PreviewProps {
+  data: ITransferHistory;
+  onExit: () => void;
+}
+
+export interface ModalViewProps {
+  children?: any;
+  visible: boolean;
+  onClickExit?: () => void;
+  full?: boolean;
 }
 
 export interface IBanks {

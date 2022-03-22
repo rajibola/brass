@@ -1,5 +1,4 @@
-import React from 'react';
-import {FC} from 'react';
+import React, {FC} from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {TextFieldProps as Props} from 'types/types';
 import {styles} from './styles';

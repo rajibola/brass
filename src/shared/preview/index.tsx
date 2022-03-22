@@ -3,14 +3,11 @@ import React, {FC} from 'react';
 import {Text, View} from 'react-native';
 import {ModalView} from 'shared';
 import {TwoItemList} from 'shared/two-list-item';
-import {ITransferHistory} from 'types/types';
+import {PreviewProps as Props} from 'types/types';
 import {formatMoney} from 'utils';
 import {styles} from './styles';
 
-export const Preview: FC<{
-  data: ITransferHistory;
-  onExit: () => void;
-}> = ({data, onExit}) => {
+export const Preview: FC<Props> = ({data, onExit}) => {
   return (
     <ModalView visible={!!data} onClickExit={onExit}>
       <View style={styles.container}>

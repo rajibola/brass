@@ -12,8 +12,8 @@ export const styles = StyleSheet.create({
   },
   heading: {
     textAlign: 'center',
-    fontSize: 16,
-    lineHeight: 28,
+    fontSize: hp(16),
+    lineHeight: hp(28),
     fontWeight: 'bold',
     marginBottom: hp(20),
   },
