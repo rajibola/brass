@@ -158,3 +158,11 @@ export interface VerifyAccountProps {
   bank_code: string;
   account_number: string;
 }
+export interface LoaderProps {
+  isLoading: boolean | string;
+}
+
+export interface TwoListProps {
+  properties: string;
+  value: string | number;
+}

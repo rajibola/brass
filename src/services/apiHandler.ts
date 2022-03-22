@@ -1,5 +1,6 @@
 import Axios, {AxiosRequestConfig, Method} from 'axios';
-export const BASE_URL = 'https://api.paystack.co';
+import {ENV} from 'utils';
+
 /**
  * Utility that calls the backend api service
  * @param {String} url: /path/to/api
@@ -33,17 +34,15 @@ export const apiService = (
     return 'application/json';
   };
 
-  const SECRET_KEY = 'sk_test_19ca61f2b9533404a151c666aaba6ec95b05ad54';
-
   const header = {
     'Content-Type': headerContent(),
-    Authorization: `Bearer ${SECRET_KEY}`,
+    Authorization: `Bearer ${ENV.SECRET_KEY}`,
     ...headers,
   };
 
   const config: AxiosRequestConfig = {
     method: type,
-    url: BASE_URL + url,
+    url: ENV.BASE_URL + url,
     data,
     headers: header,
   };

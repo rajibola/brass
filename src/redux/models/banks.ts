@@ -1,3 +1,4 @@
+import {Alert} from 'react-native';
 import bankAPI from 'services/apis/bankAPI';
 import {BankResponse, IVerifyAccount, VerifyAccountProps} from 'types/types';
 import {reducerActions as reducers} from './reducers';
@@ -22,6 +23,7 @@ export const Banks = {
         }
       } catch (error) {
         console.log(error);
+        Alert.alert('Please check your internet connection or restart the app');
         dispatch.Banks.setError(true);
       }
     },

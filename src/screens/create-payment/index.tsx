@@ -1,19 +1,19 @@
 import {useSearch} from 'hooks';
-import React, {FC, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Alert,
   FlatList,
   KeyboardAvoidingView,
   Platform,
   Text,
-  TextStyle,
   TouchableOpacity,
   View,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootDispatch, RootState} from 'redux/store';
-import {Loader} from 'screens';
 import {Button, ModalView, SearchBar, TextInputField} from 'shared';
+import {Background} from 'shared/background';
+import {Loader} from 'shared/loader';
 import {IBanks} from 'types/types';
 import {hp} from 'utils';
 import {styles} from './styles';
@@ -23,7 +23,9 @@ export const CreatePayment = () => {
     Banks: {getBanks, verifyAccount},
     Transfers: {initiateTransfer},
   } = useDispatch<RootDispatch>();
-  const {banks, isVerifying} = useSelector((state: RootState) => state.Banks);
+  const {banks, isVerifying, isLoading} = useSelector(
+    (state: RootState) => state.Banks,
+  );
 
   const [accountNumber, setAccountNumber] = useState<string>('');
   const [accountName, setAccountName] = useState<string>('');
@@ -91,7 +93,7 @@ export const CreatePayment = () => {
 
   return (
     <View style={styles.container}>
-      <Background text="BRASS" />
+      <Background text="BRASS" variant="big" />
       <View>
         <Text style={styles.brass}>Brass</Text>
         <Text style={styles.subText}>Transfer funds made easy!</Text>
@@ -145,11 +147,13 @@ export const CreatePayment = () => {
               keyExtractor={item => item.id.toString()}
               renderItem={_renderItem}
               contentContainerStyle={{paddingBottom: 40}}
+              onRefresh={getBanks}
+              refreshing={!!isLoading}
             />
           </ModalView>
         </View>
 
-        <Loader isLoading={isVerifying!} />
+        <Loader isLoading={isVerifying! || isLoading!} />
       </KeyboardAvoidingView>
     </View>
   );
