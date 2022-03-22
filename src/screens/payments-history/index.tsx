@@ -3,9 +3,9 @@ import moment from 'moment';
 import React, {FC, useEffect, useState} from 'react';
 import {FlatList, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {ITransferHistory} from 'redux';
 import {RootDispatch, RootState} from 'redux/store';
 import {ModalView, SearchBar, TransactionList} from 'shared';
+import {ITransferHistory} from 'types/types';
 import {deviceHeight, formatMoney, hp, wp} from 'utils';
 import {styles} from './styles';
 
@@ -152,8 +152,8 @@ export const Loader: FC<{isLoading: boolean | string}> = ({isLoading}) => {
           zIndex: 5,
           paddingTop: '50%',
         }}>
-        <Text style={{color: 'white', fontSize: 18}}>
-          Loading Transaction History...
+        <Text style={{color: 'white', fontSize: 28}}>
+          {typeof isLoading == 'string' ? isLoading : 'Loading...'}
         </Text>
       </View>
     </ModalView>

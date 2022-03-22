@@ -1,9 +1,20 @@
 import {useSearch} from 'hooks';
-import React, {useEffect, useState} from 'react';
-import {Alert, FlatList, Text, TouchableOpacity, View} from 'react-native';
+import React, {FC, useEffect, useState} from 'react';
+import {
+  Alert,
+  FlatList,
+  KeyboardAvoidingView,
+  Platform,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {RootDispatch, RootState, IBanks} from 'redux';
-import {ModalView, SearchBar, TextInputField, Button} from 'shared';
+import {RootDispatch, RootState} from 'redux/store';
+import {Loader} from 'screens';
+import {Button, ModalView, SearchBar, TextInputField} from 'shared';
+import {IBanks} from 'types/types';
 import {hp} from 'utils';
 import {styles} from './styles';
 
@@ -12,7 +23,7 @@ export const CreatePayment = () => {
     Banks: {getBanks, verifyAccount},
     Transfers: {initiateTransfer},
   } = useDispatch<RootDispatch>();
-  const {banks} = useSelector((state: RootState) => state.Banks);
+  const {banks, isVerifying} = useSelector((state: RootState) => state.Banks);
 
   const [accountNumber, setAccountNumber] = useState<string>('');
   const [accountName, setAccountName] = useState<string>('');
@@ -48,7 +59,7 @@ export const CreatePayment = () => {
 
   const transfer = () => {
     if (+amount! < 100 || +amount! > 10000000) {
-      Alert.alert('Amount must be between 100 and 10,000,000 naira');
+      Alert.alert('Amount must be between ₦100 and ₦10,000,000');
       return;
     }
     initiateTransfer({
@@ -56,6 +67,11 @@ export const CreatePayment = () => {
       account_number: accountNumber,
       recipient_name: accountName,
       bank_code: selectedBank?.code!,
+      onSuccess: () => {
+        setAccountNumber('');
+        setAccountName('');
+        setAmount('');
+      },
     });
   };
 
@@ -75,85 +91,66 @@ export const CreatePayment = () => {
 
   return (
     <View style={styles.container}>
-      <Background />
+      <Background text="BRASS" />
       <View>
         <Text style={styles.brass}>Brass</Text>
         <Text style={styles.subText}>Transfer funds made easy!</Text>
       </View>
-
-      <View>
-        <TextInputField
-          placeholder="Select bank"
-          clickable
-          onPress={() => setModal(true)}
-          value={selectedBank?.name}
-        />
-
-        <TextInputField
-          onChangeText={setAccountNumber}
-          placeholder="Account number"
-          value={accountNumber}
-          editable={!!selectedBank}
-          maxLength={10}
-        />
-
-        <TextInputField
-          placeholder="Account name"
-          value={accountName}
-          editable={false}
-        />
-
-        <TextInputField
-          onChangeText={setAmount}
-          placeholder="Enter amount"
-          value={amount}
-          editable={!!selectedBank}
-        />
-
-        <Button
-          data={[amount, accountName, accountNumber, selectedBank?.code]}
-          onPress={transfer}
-        />
-
-        <ModalView visible={modal} onClickExit={() => setModal(false)}>
-          <SearchBar onChangeText={setSearch} value={search} />
-          <FlatList
-            data={filteredBanks}
-            keyExtractor={item => item.id.toString()}
-            renderItem={_renderItem}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <View>
+          <TextInputField
+            placeholder="Select bank"
+            clickable
+            onPress={() => setModal(true)}
+            value={selectedBank?.name}
           />
-        </ModalView>
-      </View>
-    </View>
-  );
-};
 
-const Background = () => {
-  return (
-    <View
-      style={{
-        flex: 1,
-        // backgroundColor: 'red',
-        position: 'absolute',
-        // alignSelf: 'center',
-        // left: 0,
-        right: '-80%',
-        top: '20%',
-        // bottom: 0,
-        // borderWidth: 1,
-        width: '170%',
-        height: '100%',
-        justifyContent: 'center',
-      }}>
-      <Text
-        style={{
-          fontSize: 190,
-          fontWeight: '900',
-          transform: [{rotate: '90deg'}],
-          opacity: 0.09,
-        }}>
-        BRASS
-      </Text>
+          <TextInputField
+            onChangeText={setAccountNumber}
+            placeholder="Account number"
+            value={accountNumber}
+            editable={!!selectedBank}
+            maxLength={10}
+            keyboardType="number-pad"
+          />
+
+          <TextInputField
+            placeholder="Account name"
+            value={accountName}
+            editable={false}
+          />
+
+          <TextInputField
+            onChangeText={setAmount}
+            placeholder="Enter amount"
+            value={amount}
+            editable={!!selectedBank}
+            keyboardType="number-pad"
+          />
+
+          <Button
+            data={[amount, accountName, accountNumber, selectedBank?.code]}
+            onPress={transfer}
+          />
+
+          <ModalView visible={modal} onClickExit={() => setModal(false)}>
+            <SearchBar
+              onChangeText={setSearch}
+              value={search}
+              placeholder="Search banks"
+            />
+            <FlatList
+              data={filteredBanks}
+              keyExtractor={item => item.id.toString()}
+              renderItem={_renderItem}
+              contentContainerStyle={{paddingBottom: 40}}
+            />
+          </ModalView>
+        </View>
+
+        <Loader isLoading={isVerifying!} />
+      </KeyboardAvoidingView>
     </View>
   );
 };

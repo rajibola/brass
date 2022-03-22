@@ -1,12 +1,9 @@
+import {Alert} from 'react-native';
 import transferAPI from 'services/apis/transferAPI';
+import {ICreateTransfer, TransferProps, TransferResponse} from 'types/types';
 import {reducerActions as reducers} from './reducers';
 
-interface UserResponse {
-  data: ReadonlyArray<ITransferHistory>;
-  isLoading: boolean;
-}
-
-const State: UserResponse = {
+const State: TransferResponse = {
   data: [],
   isLoading: false,
 };
@@ -19,7 +16,7 @@ export const Transfers = {
       try {
         dispatch.Transfers.setState({isLoading: true});
         const result = await transferAPI.getTransfers();
-        const data = (await result) as UserResponse;
+        const data = (await result) as TransferResponse;
         if (data) {
           dispatch.Transfers.setState({isLoading: false});
           dispatch.Transfers.setState({data: data});
@@ -37,6 +34,7 @@ export const Transfers = {
       bank_code,
       account_number,
       recipient_name,
+      onSuccess,
     }: TransferProps) {
       try {
         dispatch.Transfers.setState({isLoading: true});
@@ -51,6 +49,8 @@ export const Transfers = {
           receipientData.recipient_code,
         );
         dispatch.Transfers.setState({isLoading: false});
+        onSuccess?.();
+        Alert.alert('Transfer successful!');
         return result;
       } catch (error) {
         console.log(error);
@@ -61,83 +61,3 @@ export const Transfers = {
     },
   }),
 };
-
-export interface TransferProps {
-  amount: string;
-  bank_code: string;
-  account_number: string;
-  recipient_name: string;
-}
-
-export interface ICreateTransfer {
-  active: true;
-  createdAt: string;
-  currency: string;
-  description: null;
-  domain: string;
-  email: null;
-  id: number;
-  integration: number;
-  metadata: null;
-  name: string;
-  recipient_code: string;
-  type: string;
-  updatedAt: string;
-  is_deleted: false;
-  isDeleted: false;
-  details: {
-    authorization_code: null;
-    account_number: string;
-    account_name: string;
-    bank_code: string;
-    bank_name: string;
-  };
-}
-
-export interface ITransferHistory {
-  amount: number;
-  createdAt: string;
-  currency: string;
-  domain: string;
-  failures: null;
-  id: number;
-  integration: number;
-  reason: string;
-  reference: string;
-  source: string;
-  source_details: null;
-  status: string;
-  titan_code: null;
-  transfer_code: string;
-  transferred_at: null;
-  updatedAt: string;
-  recipient: {
-    active: true;
-    createdAt: string;
-    currency: string;
-    description: null;
-    domain: string;
-    email: null;
-    id: number;
-    integration: number;
-    metadata: null;
-    name: string;
-    recipient_code: string;
-    type: string;
-    updatedAt: string;
-    is_deleted: false;
-    isDeleted: false;
-    details: {
-      authorization_code: null;
-      account_number: string;
-      account_name: string;
-      bank_code: string;
-      bank_name: string;
-    };
-  };
-  session: {
-    provider: null;
-    id: null;
-  };
-  fee_charged: number;
-}

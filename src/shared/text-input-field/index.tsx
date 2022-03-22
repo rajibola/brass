@@ -1,16 +1,17 @@
 import React from 'react';
 import {FC} from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {TextFieldProps as Props} from 'types/types';
 import {styles} from './styles';
 
-export const TextInputField: FC<{
-  onChangeText?: (e: string) => void;
-  placeholder: string;
-  clickable?: boolean;
-  onPress?: () => void;
-  value?: string;
-  [x: string]: any;
-}> = ({onPress, value, clickable, onChangeText, placeholder, ...props}) => {
+export const TextInputField: FC<Props> = ({
+  onPress,
+  value,
+  clickable,
+  onChangeText,
+  placeholder,
+  ...props
+}) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       {!clickable ? (

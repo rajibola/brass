@@ -10,6 +10,8 @@ export const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: wp(30),
     right: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   innerView: {
     width: '100%',

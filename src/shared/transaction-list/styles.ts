@@ -2,6 +2,10 @@ import {StyleSheet} from 'react-native';
 import {hp, wp} from 'utils/responsive-dimensions';
 
 export const styles = StyleSheet.create({
+  date: {
+    opacity: 0.5,
+    fontSize: hp(12),
+  },
   initials: {
     letterSpacing: 1,
     fontWeight: 'bold',
@@ -36,7 +40,7 @@ export const styles = StyleSheet.create({
     marginRight: wp(10),
   },
 
-  name: {fontWeight: '600', fontSize: hp(14), marginBottom: hp(2), width: 200},
+  name: {fontWeight: '600', fontSize: hp(14), marginBottom: hp(4), width: 200},
 
   amount: {
     color: 'green',

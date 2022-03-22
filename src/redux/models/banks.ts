@@ -1,13 +1,11 @@
 import bankAPI from 'services/apis/bankAPI';
-import transferAPI from 'services/apis/transferAPI';
+import {BankResponse, IVerifyAccount, VerifyAccountProps} from 'types/types';
 import {reducerActions as reducers} from './reducers';
 
-interface UserResponse {
-  banks: ReadonlyArray<IBanks>;
-}
-
-const State: UserResponse = {
+const State: BankResponse = {
   banks: [],
+  isLoading: false,
+  isVerifying: false,
 };
 export const Banks = {
   name: 'Banks',
@@ -17,7 +15,7 @@ export const Banks = {
     async getBanks() {
       try {
         const result = await bankAPI.getBanks();
-        const data = (await result) as UserResponse;
+        const data = (await result) as BankResponse['banks'];
         if (data) {
           dispatch.Banks.setState({banks: data});
           return data || [];
@@ -28,49 +26,21 @@ export const Banks = {
       }
     },
 
-    async verifyAccount({
-      bank_code,
-      account_number,
-    }: {
-      bank_code: string;
-      account_number: string;
-    }) {
+    async verifyAccount({bank_code, account_number}: VerifyAccountProps) {
       try {
+        dispatch.Banks.setState({isVerifying: 'Verifying account...'});
         const recipient = await bankAPI.verifyAccount(
           bank_code,
           account_number,
         );
         const receipientData = (await recipient) as IVerifyAccount;
-
+        dispatch.Banks.setState({isVerifying: false});
         return receipientData;
       } catch (error) {
         console.log(error);
+        dispatch.Banks.setState({isVerifying: false});
         dispatch.Banks.setError(true);
       }
     },
   }),
 };
-
-export interface IBanks {
-  name: string;
-  slug: string;
-  code: string;
-  longcode: string;
-  gateway: null;
-  pay_with_bank: false;
-  active: true;
-  is_deleted: false;
-  country: string;
-  currency: string;
-  type: string;
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-}
-[];
-
-export interface IVerifyAccount {
-  account_number: string;
-  account_name: string;
-  bank_id: number;
-}
