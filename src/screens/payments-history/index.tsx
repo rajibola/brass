@@ -1,10 +1,8 @@
 import {useSearch} from 'hooks';
 import React, {useEffect, useState} from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {SearchBar, TransactionList} from 'shared';
-import {Loader} from 'shared/loader';
-import {Preview} from 'shared/preview';
+import {SearchBar, TransactionList, Loader, Preview} from 'shared';
 import {ITransferHistory, RootDispatch, RootState} from 'types/types';
 import {styles} from './styles';
 
@@ -54,6 +52,9 @@ export const PaymentHistory = () => {
         renderItem={_renderItem}
         onRefresh={getAllTranfers}
         refreshing={isLoading}
+        ListEmptyComponent={
+          <Text style={styles.empty}>Pull down to refresh</Text>
+        }
       />
       <Preview data={transaction!} onExit={() => setTransaction(undefined)} />
       <Loader isLoading={isLoading} />

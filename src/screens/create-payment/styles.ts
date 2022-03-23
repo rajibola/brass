@@ -3,6 +3,11 @@ import {StyleSheet} from 'react-native';
 import {hp, wp} from 'utils/responsive-dimensions';
 
 export const styles = StyleSheet.create({
+  empty: {
+    textAlign: 'center',
+    fontSize: hp(16),
+    marginTop: hp(20),
+  },
   name: {fontSize: hp(15)},
   subText: {
     fontSize: hp(34),

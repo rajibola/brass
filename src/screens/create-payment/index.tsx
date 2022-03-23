@@ -11,10 +11,8 @@ import {
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {Button, ModalView, SearchBar, TextInputField} from 'shared';
-import {Background} from 'shared/background';
-import {Loader} from 'shared/loader';
+import {Background, Loader} from 'shared';
 import {IBanks, RootDispatch, RootState} from 'types/types';
-import {hp} from 'utils';
 import {styles} from './styles';
 
 export const CreatePayment = () => {
@@ -149,6 +147,9 @@ export const CreatePayment = () => {
               contentContainerStyle={{paddingBottom: 40}}
               onRefresh={getBanks}
               refreshing={!!isLoading}
+              ListEmptyComponent={
+                <Text style={styles.empty}>Pull down to refresh</Text>
+              }
             />
           </ModalView>
         </View>
