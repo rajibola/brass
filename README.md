@@ -41,49 +41,49 @@ $ cd .. && yarn run ios
    c. Sends the payment information to the API for processing
 2. An interface that allows a user see all payments they've ever created and view the details on any one that's selected
 
-### Folder Structure
+### `SRC` Folder Structure
 
 ```
 .
-├── App.tsx
-├── Gemfile
-├── Gemfile.lock
-├── README.md
-├── __tests__
-│   ├── background.component.test.tsx
-│   ├── button.component.test.tsx
-│   ├── create-payment.test.tsx
-│   ├── format-money.utils.test.ts
-│   ├── helpers.utils.test.tsx
-│   ├── loader.component.test.tsx
-│   ├── modal-view.component.test.tsx
-│   ├── payment-history.test.tsx
-│   ├── preview.component.test.tsx
-│   └── transaction-list.component.test.tsx
-├── app.json
-├── babel.config.js
-├── docs
-│   └── images
-├── index.js
-├── metro.config.js
-├── package.json
-├── src
-│   ├── constants
-│   ├── env.dev.ts
-│   ├── env.prod.ts
-│   ├── hooks
-│   ├── navigation
-│   ├── redux
-│   ├── screens
-│   ├── services
-│   ├── shared
-│   ├── types
-│   └── utils
-├── tsconfig.json
-└── yarn.lock
+├── constants
+│   └── colors.ts
+├── env.dev.ts
+├── env.prod.ts
+├── hooks
+│   ├── index.ts
+│   └── useSearch.ts
+├── navigation
+│   └── index.tsx
+├── redux
+│   ├── models
+│   └── store
+├── screens
+│   ├── create-payment
+│   ├── index.ts
+│   └── payments-history
+├── services
+│   ├── apiHandler.ts
+│   └── apis
+├── shared
+│   ├── background
+│   ├── button
+│   ├── index.ts
+│   ├── loader
+│   ├── modal-view
+│   ├── preview
+│   ├── search-bar
+│   ├── text-input-field
+│   ├── transaction-list
+│   └── two-list-item
+├── types
+│   └── types.d.ts
+└── utils
+    ├── format-money.ts
+    ├── helpers.ts
+    ├── index.ts
+    └── responsive-dimensions.ts
 
-13 directories, 23 files
-
+23 directories, 14 files
 ```
 
 ## Solution
