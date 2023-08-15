@@ -38,7 +38,9 @@ export const CreatePayment = () => {
   }, []);
 
   useEffect(() => {
-    if (accountNumber?.length !== 10) return;
+    if (accountNumber?.length !== 10) {
+      return;
+    }
 
     const verify = async () => {
       const response = await verifyAccount({
