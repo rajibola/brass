@@ -18,7 +18,7 @@ it('renders transaction correctly', async () => {
   expect(getByText('ridwan')).toBeTruthy();
 });
 
-it('renders transaction correctly', async () => {
+it('renders transaction correctly with pending status', async () => {
   const {getByText} = render(
     <TransactionList
       date=""

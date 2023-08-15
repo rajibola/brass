@@ -7,4 +7,4 @@ export const getInitials = (name: string) =>
     ?.join('')
     .toUpperCase();
 
-export const ENV = __DEV__ ? EnvDev : EnvProd; // Environment Management
+export const ENV = __DEV__ ? EnvDev : EnvProd;

@@ -1,26 +1,28 @@
-import colors from 'constants/colors';
+import COLORS from 'constants/COLORS';
 import React, {FC} from 'react';
-import {Text, TouchableOpacity} from 'react-native';
-import {ButtonComponentProps as Props} from 'types/types';
+import {StyleProp, Text, TouchableOpacity, ViewStyle} from 'react-native';
 import {styles} from './styles';
 
-export const Button: FC<Props> = ({
-  data,
+export const Button: FC<ButtonComponentProps> = ({
+  dependencies,
   onPress,
   buttonStyle,
   textStyle,
   text,
 }) => {
-  const filled = data.every(item => !!item);
+  const isFilled = dependencies.every(item => Boolean(item));
+
+  const containerStyles: StyleProp<ViewStyle>[] = [
+    styles.container,
+    {backgroundColor: isFilled ? COLORS.green : 'grey'},
+    buttonStyle,
+  ];
+
   return (
     <TouchableOpacity
-      style={[
-        styles.container,
-        {backgroundColor: filled ? colors.green : 'grey'},
-        buttonStyle,
-      ]}
+      style={containerStyles}
       onPress={onPress}
-      disabled={!filled}>
+      disabled={!isFilled}>
       <Text style={[styles.text, textStyle]}>{text}</Text>
     </TouchableOpacity>
   );

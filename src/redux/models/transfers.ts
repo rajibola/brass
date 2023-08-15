@@ -1,6 +1,5 @@
 import {Alert} from 'react-native';
 import transferAPI from 'services/apis/transferAPI';
-import {ICreateTransfer, TransferProps, TransferResponse} from 'types/types';
 import {reducerActions as reducers} from './reducers';
 
 const State: TransferResponse = {

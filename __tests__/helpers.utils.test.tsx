@@ -1,7 +1,7 @@
 import {getInitials} from 'utils';
 
 //test getInitials function
-describe('getInitials', () => {
+describe('getInitials works correctly', () => {
   it('should return the first letter of the first and last name', () => {
     const name = 'John Doe';
     const expected = 'JD';
@@ -11,7 +11,7 @@ describe('getInitials', () => {
 });
 
 //test getInitials function by passing a string with no spaces
-describe('getInitials', () => {
+describe('getInitials with wrong input', () => {
   it('should return the first letter of the first and last name', () => {
     const name = 'JohnDoe';
     const expected = 'JD';

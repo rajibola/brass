@@ -62,8 +62,6 @@ export const apiService = (
   });
 };
 
-// export default apiService;
-
 export default {
   post: async (url: string, data: any, options?: any) =>
     apiService(url, 'POST', data, options),

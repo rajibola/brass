@@ -1,8 +1,9 @@
-import COLORS from 'constants/colors';
+import COLORS from 'constants/COLORS';
 import {StyleSheet} from 'react-native';
 import {hp, wp} from 'utils/responsive-dimensions';
 
 export const styles = StyleSheet.create({
+  bankListContainer: {paddingBottom: 40},
   empty: {
     textAlign: 'center',
     fontSize: hp(16),
@@ -12,12 +13,11 @@ export const styles = StyleSheet.create({
   subText: {
     fontSize: hp(34),
     fontWeight: '300',
-    // color: 'rgb(94,202,105)',
   },
   brass: {
     fontSize: hp(54),
     fontWeight: 'bold',
-    color: 'rgb(94,202,105)',
+    color: COLORS.green,
     marginTop: hp(40),
     marginBottom: hp(10),
     letterSpacing: hp(2),

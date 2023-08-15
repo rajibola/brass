@@ -1,12 +1,11 @@
 import moment from 'moment';
 import React, {FC} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
-import {TransactionListProps as Props} from 'types/types';
 import {getInitials} from 'utils';
 import {formatMoney} from 'utils/format-money';
 import {styles} from './styles';
 
-export const TransactionList: FC<Props> = ({
+export const TransactionList: FC<TransactionListProps> = ({
   name,
   status,
   amount,

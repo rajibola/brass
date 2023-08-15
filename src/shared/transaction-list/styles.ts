@@ -1,4 +1,4 @@
-import colors from 'constants/colors';
+import colors from 'constants/COLORS';
 import {StyleSheet} from 'react-native';
 import {hp, wp} from 'utils/responsive-dimensions';
 

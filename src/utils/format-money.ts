@@ -8,11 +8,10 @@ export const formatMoney = (
   if (number === null) {
     return currencies[currency] || currency;
   }
-  const value = parseInt(number as string);
+  const value = parseInt(number as string, 10);
   if (isNaN(value)) {
     return '';
   }
-  //return new Intl.NumberFormat('en-US', {style: 'currency', currency: cur}).format(value).replace('NGN', '₦');
   var exponent = '',
     numberstr = number.toString(),
     eindex = numberstr.indexOf('e'),
@@ -52,7 +51,6 @@ export const formatMoney = (
     }
   }
 
-  // console.log('integer: ', integer, ', fractional: ', fractional, ', exponent: ', exponent);
   return (
     (currencies[currency] || currency) +
     ' ' +

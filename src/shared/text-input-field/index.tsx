@@ -1,9 +1,8 @@
 import React, {FC} from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
-import {TextFieldProps as Props} from 'types/types';
 import {styles} from './styles';
 
-export const TextInputField: FC<Props> = ({
+export const TextInputField: FC<TextFieldProps> = ({
   onPress,
   value,
   clickable,
@@ -16,18 +15,13 @@ export const TextInputField: FC<Props> = ({
       {!clickable ? (
         <TextInput
           placeholder={placeholder}
-          style={{height: 40, paddingHorizontal: 10}}
+          style={styles.input}
           {...props}
           value={value}
           onChangeText={onChangeText}
         />
       ) : (
-        <View
-          style={{
-            height: 40,
-            paddingHorizontal: 10,
-            justifyContent: 'center',
-          }}>
+        <View style={styles.clickable}>
           <Text>{value ? value : placeholder}</Text>
         </View>
       )}

@@ -1,7 +1,6 @@
 import {render, waitFor} from '@testing-library/react-native';
 import React from 'react';
 import {Preview} from 'shared';
-import {ITransferHistory} from 'types/types';
 
 jest.useFakeTimers();
 

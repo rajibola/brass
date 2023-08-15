@@ -12,7 +12,6 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {Button, ModalView, SearchBar, TextInputField} from 'shared';
 import {Background, Loader} from 'shared';
-import {IBanks, RootDispatch, RootState} from 'types/types';
 import {styles} from './styles';
 
 export const CreatePayment = () => {
@@ -35,6 +34,7 @@ export const CreatePayment = () => {
 
   useEffect(() => {
     getBanks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export const CreatePayment = () => {
         bank_code: selectedBank?.code!,
         account_number: accountNumber,
       });
-      if (!!response?.account_name) {
+      if (response?.account_name) {
         setAccountName(response.account_name);
       } else {
         setAccountName('');
@@ -54,7 +54,7 @@ export const CreatePayment = () => {
     };
 
     verify();
-  }, [accountNumber, selectedBank]);
+  }, [accountNumber, selectedBank, verifyAccount]);
 
   const transfer = () => {
     if (+amount! < 100 || +amount! > 10000000) {
@@ -129,7 +129,12 @@ export const CreatePayment = () => {
           />
 
           <Button
-            data={[amount, accountName, accountNumber, selectedBank?.code]}
+            dependencies={[
+              amount,
+              accountName,
+              accountNumber,
+              selectedBank?.code,
+            ]}
             onPress={transfer}
             text="TRANSFER NOW"
           />
@@ -144,9 +149,9 @@ export const CreatePayment = () => {
               data={filteredBanks}
               keyExtractor={item => item.id.toString()}
               renderItem={_renderItem}
-              contentContainerStyle={{paddingBottom: 40}}
+              contentContainerStyle={styles.bankListContainer}
               onRefresh={getBanks}
-              refreshing={!!isLoading}
+              refreshing={Boolean(isLoading)}
               ListEmptyComponent={
                 <Text style={styles.empty}>Pull down to refresh</Text>
               }
@@ -154,7 +159,7 @@ export const CreatePayment = () => {
           </ModalView>
         </View>
 
-        <Loader isLoading={isVerifying! || isLoading!} />
+        <Loader isLoading={isVerifying || isLoading} />
       </KeyboardAvoidingView>
     </View>
   );

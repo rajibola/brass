@@ -1,6 +1,5 @@
 import {Alert} from 'react-native';
 import bankAPI from 'services/apis/bankAPI';
-import {BankResponse, IVerifyAccount, VerifyAccountProps} from 'types/types';
 import {reducerActions as reducers} from './reducers';
 
 const State: BankResponse = {

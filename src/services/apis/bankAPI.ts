@@ -6,5 +6,5 @@ export default {
       `/bank/resolve?account_number=${account_number}&bank_code=${bank_code}`,
     ),
 
-  getBanks: () => apiHandler.get(`/bank?country=nigeria`),
+  getBanks: () => apiHandler.get('/bank?country=nigeria'),
 };

@@ -3,7 +3,6 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {SearchBar, TransactionList, Loader, Preview} from 'shared';
-import {ITransferHistory, RootDispatch, RootState} from 'types/types';
 import {styles} from './styles';
 
 export const PaymentHistory = () => {
@@ -24,9 +23,10 @@ export const PaymentHistory = () => {
 
   useEffect(() => {
     getAllTranfers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const _renderItem = ({item}: {item: any}) => {
+  const _renderItem = ({item}: {item: typeof filteredList[0]}) => {
     const {recipient, status, amount, createdAt} = item;
     return (
       <TransactionList
